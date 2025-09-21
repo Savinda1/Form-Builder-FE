@@ -104,7 +104,7 @@ console.log("csval (latest customValue):", csval);
           className="bg-red-600 text-white px-4 py-2 rounded w-full sm:w-auto flex items-center justify-center"
           onClick={() => handleDelete(form._id)}
         >
-          <Trash2 size={18} />
+          <Trash2 size={16} />
         </Button>
       </div>
 

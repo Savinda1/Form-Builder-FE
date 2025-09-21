@@ -58,15 +58,7 @@ console.log("csval (latest customValue):", csval);
     console.log("Custom action clicked", id);
   };
 
-  // Delete button handler
-  /*const handleDelete = async (id) => {
-    try {
-      await deleteHotel(id).unwrap();
-      alert("Hotel deleted successfully!");
-    } catch (err) {
-      console.error("Failed to delete hotel:", err);
-    }
-  };*/
+
 
   return (
     <div className="p-12 bg-white rounded-lg shadow-xl w-full max-w-md mx-auto border">

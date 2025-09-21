@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import { Home, FileText, Settings, Eye, Layers,ArrowLeft } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 
-
 export function AppSidebar({ ...props }) {
 
   const { user } = useUser();

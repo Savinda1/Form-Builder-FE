@@ -29,10 +29,7 @@ const createForm = () => {
   const [fields, setFields] = useState([]);
   const navigate = useNavigate();
 
- 
-
-  
-  const [createForm, { isLoading }] = useCreateFormMutation();
+ const [createForm, { isLoading }] = useCreateFormMutation();
 
   const form = useForm({
     resolver: zodResolver(formSchema),

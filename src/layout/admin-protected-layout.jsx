@@ -1,6 +1,7 @@
 import { useUser } from "@clerk/clerk-react";
 import { Navigate, Outlet } from "react-router";
 
+
 const AdminProtectedLayout = () => {
   const { user } = useUser();
 

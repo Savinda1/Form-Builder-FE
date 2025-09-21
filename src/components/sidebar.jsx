@@ -12,15 +12,27 @@ import {
 } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
 import { Home, FileText, Settings, Eye, Layers,ArrowLeft } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
 
-const data = {
+
+export function AppSidebar({ ...props }) {
+
+  const { user } = useUser();
+
+  const data = {
   navMain: [
     {
       items: [
-        { title: "Dashboard", url: "#", icon: Home },
-        { title: "Forms", url: "/", icon: FileText },
+        
+        { title: "Dashboard", url: "/", icon: Home },
+        { title: "Forms", url: "/Form", icon: FileText },
         { title: "Form Builder", url: "#", icon: Layers },
-        { title: "Submissions", url: "/Form/submition", icon: FileText },
+
+ ...(user?.publicMetadata?.role === "admin"
+          ? [{ title: "Submissions", url: "/Form/submition", icon: FileText }]
+          : []),
+
+
         { title: "Preview", url: "#", icon: Eye },
         { title: "Settings", url: "#", icon: Settings },
       ],
@@ -28,7 +40,6 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }) {
   return (
     <Sidebar
       {...props}

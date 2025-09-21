@@ -8,10 +8,12 @@ import Homepage from './pages/home.page';
 import SignInPage from './pages/sign-in.page';
 import SignUpPage  from './pages/sign-up.page';
 import CreateForm from './pages/create-Form.page';
-//import Submitionspage from './pages/submitions.page';
-import  Sidebar  from './pages/submition.page';
-//import FormListings from './components/FormListings';
+import Dashboard from './pages/Dashbord.page';
+import  Submition  from './pages/submition.page';
 import PreviewPage from './pages/preview.page';
+import ProtectedLayout from "./layout/protected.layout";
+import AdminProtectedLayout from "./layout/admin-protected-layout";
+
 
 
 import { store } from "./lib/api/store";
@@ -38,11 +40,23 @@ createRoot(document.getElementById('root')).render(
  <Route element={<RootLayout />}>
   <Route element={<MainLayout />}>
 
-  
-        <Route path="/" element={<Homepage/>} />
+  <Route path="/" element={<Dashboard/>} />
+
+      <Route element={<ProtectedLayout />}>
+
+        <Route path="/Form" element={<Homepage/>} />
          <Route path="/Form/create" element={<CreateForm/>} />
           <Route path="/preview/:id" element={<PreviewPage />} />
-          <Route path="/Form/submition" element={<Sidebar/>} />
+
+                <Route element={<AdminProtectedLayout/>}>
+
+          <Route path="/Form/submition" element={<Submition />} />
+
+
+         </Route>
+          
+</Route>
+        
 
 </Route>
 

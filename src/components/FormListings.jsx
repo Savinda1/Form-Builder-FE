@@ -31,7 +31,6 @@ export default function FormListings() {
   }
 //const form= data? data.map((forms)=>forms.forms) :[];
 
-//console.log("fdjhjdf",form)
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

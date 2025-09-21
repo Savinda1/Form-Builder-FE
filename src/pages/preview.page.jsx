@@ -3,8 +3,6 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Formpreview from "@/components/Formpreview";
-//import Hero from '@/components/Hero'
-//import Test from '@/components/test'
 import { AppSidebar } from "@/components/sidebar"
 import { Link } from "react-router-dom";
 import { Home, FileText, Settings, Eye, Layers,ArrowLeft } from "lucide-react";

@@ -1,7 +1,7 @@
 import React from 'react'
 import CreateForm from '@/components/CreateForm'
 //import Test from '@/components/test'
-import { AppSidebar } from "@/components/Sidebar"
+import { AppSidebar } from "@/components/sidebar"
 //import FormListings from "@/components/FormListings"
 import {
   Breadcrumb,

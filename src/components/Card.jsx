@@ -1,123 +1,91 @@
-import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import { Button } from "./ui/button";
+import React from "react";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { EditIcon, Trash2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import { useGetSubmiFormQuery } from "@/lib/api/api";
 
-
-
-import { useSelector } from "react-redux";
-
 export default function NewsCard({ form }) {
+  const { data } = useGetSubmiFormQuery();
+  console.log("All submissions response:", data);
 
-const { data, error, isLoading } = useGetSubmiFormQuery();
-console.log("All submissions response:", data);
+  const submissionsArray = data?.submissions || [];
 
-const submissionsArray = data?.submissions || [];
+  // filter this form's submissions
+  const formSubmissions = submissionsArray.filter(
+    (sub) => sub.formId === form._id
+  );
 
-// filter this form's submissions
-const formSubmissions = submissionsArray.filter(
-  (sub) => sub.formId === form._id
-);
+  // get the last customValue
+  const csval =
+    formSubmissions.length > 0
+      ? formSubmissions[formSubmissions.length - 1].data?.Submission
+      : 0;
 
-// get the last customValue (single value, not array)
-const csval = formSubmissions.length > 0 
-  ? formSubmissions[formSubmissions.length - 1].data?.Submission
-  : 0;
-
-console.log("csval (latest customValue):", csval);
-
-
-
-
-    
-  //const [customValue, setCustomValue] = useState(0);
-  //const navigate = useNavigate();
- //onst forms = useSelector((state) => state.formdata.forms);
-  //console.log("forms in card:",forms);
-  // Edit button handler
-/*  const handleEdit = (id) => {
-    navigate(`/edit/${id}`);
-  };*/
-
-  // Preview button handler
+  // Handlers
   const handlePreview = (id) => {
     console.log("Preview clicked", id);
-    setCustomValue((prev) => prev + 1);
   };
 
-  // Custom action handler
   const handleCustomAction = (id) => {
     console.log("Custom action clicked", id);
   };
 
-  // Delete button handler
-  /*const handleDelete = async (id) => {
-    try {
-      await deleteHotel(id).unwrap();
-      alert("Hotel deleted successfully!");
-    } catch (err) {
-      console.error("Failed to delete hotel:", err);
-    }
-  };*/
+  const handleEdit = (id) => {
+    console.log("Edit clicked", id);
+  };
+
+  const handleDelete = (id) => {
+    console.log("Delete clicked", id);
+  };
 
   return (
-    <div className="p-12 bg-white rounded-lg shadow-xl w-full max-w-md mx-auto border">
-      {/* Form Title */}
-      <h3 className="font-semibold text-lg sm:text-xl">{form.Title}</h3>
+    <Card className="w-full max-w-md mx-auto border shadow-lg">
+      <CardHeader>
+        <CardTitle className="text-lg sm:text-xl font-semibold">
+          {form.Title}
+        </CardTitle>
+      </CardHeader>
 
+      <CardContent>
+        <p className="text-sm text-gray-500">
+          {form.fields?.length || 0} Fields
+        </p>
+      </CardContent>
 
-      {/* Buttons */}
-      <div className="flex flex-wrap gap-2 sm:gap- mt-8">
+      <CardFooter className="flex flex-wrap gap-2">
         <Button
-          className="bg-blue-700 text-white px-4 py-2 rounded w-full sm:w-auto flex items-center gap-2"
+          variant="default"
+          className="bg-blue-700 text-white flex items-center gap-2 w-full sm:w-auto"
           onClick={() => handleEdit(form._id)}
         >
           <EditIcon size={16} /> Edit
         </Button>
 
-<Link to={`/preview/${form._id}`} 
- key={form._id}   className="w-full sm:w-auto" >
-     <Button
-          className="bg-blue-700 text-white px-4 py-2 rounded w-full sm:w-auto"
-          onClick={() => handlePreview(form._id)}
-        >
-          Preview
-        </Button>
-</Link>
+        <Link to={`/preview/${form._id}`} className="w-full sm:w-auto">
+          <Button
+            className="bg-blue-700 text-white w-full sm:w-auto"
+            onClick={() => handlePreview(form._id)}
+          >
+            Preview
+          </Button>
+        </Link>
 
         <Button
-          className="bg-blue-700 text-white px-4 py-2 rounded w-full sm:w-auto"
+          className="bg-blue-700 text-white w-full sm:w-auto"
           onClick={() => handleCustomAction(form._id)}
         >
-{csval}
+          {csval}
         </Button>
 
         <Button
-          className="bg-red-600 text-white px-4 py-2 rounded w-full sm:w-auto flex items-center justify-center"
+          variant="destructive"
+          className="flex items-center gap-2 w-full sm:w-auto"
           onClick={() => handleDelete(form._id)}
         >
-          <Trash2 size={16} />
+          <Trash2 size={16} /> Delete
         </Button>
-      </div>
-
-     
-{/*{form.fields && form.fields.length > 0 && (
-        <div className="mt-4 space-y-2">
-          {form.fields.map((field, index) => (
-            <p key={index} className="text-gray-700">
-              {field.label || field.Title || `Field ${index + 1}`}
-            </p>
-          ))}
-        </div>
-      )}*/}
-    </div>
+      </CardFooter>
+    </Card>
   );
 }

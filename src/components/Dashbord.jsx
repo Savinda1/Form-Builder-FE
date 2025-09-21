@@ -11,7 +11,7 @@ export default function Dashboard() {
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
       {/* Main Content */}
       <main className="flex-1 p-6">
-        {/* Header */}
+   
         <header className="flex flex-col sm:flex-row items-center justify-between mb-10 gap-4">
           <h1 className="text-3xl font-extrabold text-gray-800">
             Welcome to Form Builder 👋
@@ -35,7 +35,6 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* Optional Quick Action Section */}
         <section className="bg-white rounded-lg shadow p-6 text-center">
           <h2 className="text-xl font-semibold mb-3">Get Started</h2>
           <p className="text-gray-600 mb-4">
